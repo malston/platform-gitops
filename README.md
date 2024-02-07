@@ -24,6 +24,6 @@ The bootstrapping process will create the following applications:
 
   ```sh
   argocd-autopilot repo bootstrap \
-    --repo https://github.com/malston/platform-gitops \
+    --repo https://github.com/malston/argocd-bootstrap \
     --git-token "$(< ./github-token)"
   ```
