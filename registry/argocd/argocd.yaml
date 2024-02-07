@@ -8,7 +8,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'git@github.com:malston/platform-gitops.git'
+    repoURL: 'https://github.com/malston/platform-gitops.git'
     path: registry/argocd/components/argocd
     targetRevision: HEAD
   destination:
