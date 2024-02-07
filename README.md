@@ -23,5 +23,7 @@ The bootstrapping process will create the following applications:
 - Install Argo CD
 
   ```sh
-  kubectl apply -k ./registry/argocd/argocd.yaml
+  argocd-autopilot repo bootstrap \
+    --repo https://github.com/malston/platform-gitops \
+    --git-token "$(< ./github-token)"
   ```
