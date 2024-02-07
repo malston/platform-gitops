@@ -23,7 +23,8 @@ The bootstrapping process will create the following applications:
 - Install Argo CD
 
   ```sh
-  argocd-autopilot repo bootstrap \
-    --repo https://github.com/malston/argocd-bootstrap \
-    --git-token "$(< ./github-token)"
+  export GIT_USER=<git-user>
+  export GIT_TOKEN=<personal-access-token>
+  export GIT_REPO=https://github.com/$GIT_USER/argocd-bootstrap
+  argocd-autopilot repo bootstrap
   ```
