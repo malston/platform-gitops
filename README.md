@@ -23,5 +23,5 @@ The bootstrapping process will create the following applications:
 - Install Argo CD
 
   ```sh
-  kubectl -k ./registry/argocd/components/argocd.yaml
+  kubectl apply -k ./registry/argocd/argocd.yaml
   ```
