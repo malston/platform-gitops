@@ -28,3 +28,11 @@ The bootstrapping process will create the following applications:
   export GIT_REPO=https://github.com/$GIT_USER/argocd-bootstrap
   argocd-autopilot repo bootstrap
   ```
+
+- Install Registry
+
+  ```sh
+  kubectl apply -f registry/argocd/registry.yaml
+  argocd app get registry
+  argocd app sync registry
+  ```
