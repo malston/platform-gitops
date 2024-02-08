@@ -25,7 +25,7 @@ The bootstrapping process will create the following applications:
   ```sh
   cd terraform/vault
 
-  terraform init
+  terraform init -backend=false
 
   terraform refresh \
     -var-file=terraform.tfvars
