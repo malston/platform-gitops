@@ -12,26 +12,10 @@ spec:
     targetRevision: 4.0.15
     helm:
       values: |-
-        environment:
-          MINIO_BROWSER_REDIRECT_URL: https://minio-console.homelab.io
         ingress:
           enabled: false
-          path: /
-          hosts:
-            - minio.homelab.io
-          tls:
-            - secretName: minio-tls
-              hosts:
-                - minio.homelab.io
         consoleIngress:
           enabled: false
-          path: /
-          hosts:
-            - minio-console.homelab.io
-          tls:
-            - secretName: minio-console-tls
-              hosts:
-                - minio-console.homelab.io
         replicas: 1
         rootUser: k-ray
         rootPassword: feedkraystars
