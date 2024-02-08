@@ -34,7 +34,7 @@ spec:
                 - minio-console.homelab.io
         replicas: 1
         rootUser: admin
-        rootPassword: ad
+        rootPassword: admin
         persistence:
           enabled: true
           existingClaim: minio-pvc
