@@ -15,7 +15,7 @@ spec:
         environment:
           MINIO_BROWSER_REDIRECT_URL: https://minio-console.homelab.io
         ingress:
-          enabled: true
+          enabled: false
           path: /
           hosts:
             - minio.homelab.io
@@ -24,7 +24,7 @@ spec:
               hosts:
                 - minio.homelab.io
         consoleIngress:
-          enabled: true
+          enabled: false
           path: /
           hosts:
             - minio-console.homelab.io

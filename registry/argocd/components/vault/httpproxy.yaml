@@ -9,7 +9,11 @@ spec:
   virtualhost:
     fqdn: vault.homelab.io
     tls:
-      secretName: vault-tls
+      passthrough: true
+  tcpproxy:
+    services:
+      - name: vault
+        port: 443
   routes:
     - conditions:
       - prefix: /

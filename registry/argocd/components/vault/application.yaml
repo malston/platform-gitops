@@ -34,7 +34,7 @@ spec:
             }
             service_registration "kubernetes" {}
           ingress:
-            enabled: true
+            enabled: false
             hosts:
               - host: vault.homelab.io
             pathType: Prefix
