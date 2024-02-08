@@ -33,8 +33,8 @@ spec:
               hosts:
                 - minio-console.homelab.io
         replicas: 1
-        rootUser: admin
-        rootPassword: admin
+        rootUser: k-ray
+        rootPassword: feedkraystars
         persistence:
           enabled: true
           existingClaim: minio-pvc

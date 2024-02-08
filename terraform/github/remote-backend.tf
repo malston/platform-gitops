@@ -4,9 +4,9 @@ terraform {
     key      = "terraform/github/terraform.tfstate"
     endpoint = "http://minio.homelab.io:9000"
 
-    access_key                  = "admin"
-    secret_key                  = "admin"
-    region                      = "us-west-1"
+    access_key                  = "k-ray"
+    secret_key                  = "feedkraystars"
+    region                      = "us-k3d-1"
     skip_credentials_validation = true
     skip_metadata_api_check     = true
     skip_region_validation      = true
