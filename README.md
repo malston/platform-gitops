@@ -27,18 +27,17 @@ The bootstrapping process will create the following applications:
 
   terraform init -backend=false
 
-  terraform refresh \
-    -var-file=terraform.tfvars
+  cat > terraform.tfvars <<EOF
+  b64_docker_auth="$(echo malston:$GIT_TOKEN | base64)"
+  github_token="$GIT_TOKEN"
+  vault_address="http://vault.homelab.io"
+  vault_token="$VAULT_TOKEN"
+  kubernetes_api_endpoint="https://192.168.15.23:6443"
+  EOF
 
-  terraform plan \
-    -out=terraform.tfplan \
-    -var-file=terraform.tfvars
+  terraform plan -out=terraform.tfplan -var-file=terraform.tfvars
 
-  terraform apply \
-    -parallelism=5 \
-    terraform.tfplan
-
-  terraform output --raw stable_config_opsmanager > ../terraform-outputs.yml
+  terraform apply terraform.tfplan
   ```
 
 - Install ArgoCD
