@@ -20,6 +20,27 @@ The bootstrapping process will create the following applications:
 
 ## Bootstrapping
 
+- Configure MinIO and Vault
+
+  ```sh
+  cd terraform/vault
+  
+  terraform init -upgrade
+
+  terraform refresh \
+    -var-file=terraform.tfvars
+
+  terraform plan \
+    -out=terraform.tfplan \
+    -var-file=terraform.tfvars
+
+  terraform apply \
+    -parallelism=5 \
+    terraform.tfplan
+
+  terraform output --raw stable_config_opsmanager > ../terraform-outputs.yml
+  ```
+
 - Install ArgoCD
 
   ```sh
@@ -41,5 +62,5 @@ The bootstrapping process will create the following applications:
 
   ```sh
   argocd account update-password --current-password "$(argocd admin initial-password -n argocd | head -1)"
-  argocd login argocd.homelab.io --username admin --insecure
+  argocd login argocd.homelab.io --username admin --insecure || argocd login argocd.homelab.io --username admin --insecure --core
   ```

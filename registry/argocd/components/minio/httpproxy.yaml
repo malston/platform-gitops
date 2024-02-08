@@ -1,0 +1,37 @@
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: minio
+  namespace: minio
+  annotations:
+    argocd.argoproj.io/sync-wave: '10'
+spec:
+  virtualhost:
+    fqdn: minio.homelab.io
+    tls:
+      secretName: minio-tls
+  routes:
+    - conditions:
+      - prefix: /
+      services:
+        - name: minio
+          port: 80
+---
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: minio-console
+  namespace: minio
+  annotations:
+    argocd.argoproj.io/sync-wave: '10'
+spec:
+  virtualhost:
+    fqdn: minio-console.homelab.io
+    tls:
+      secretName: minio-console-tls
+  routes:
+    - conditions:
+      - prefix: /
+      services:
+        - name: minio-console
+          port: 80

@@ -1,0 +1,75 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: minio
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: '10'
+spec:
+  project: default
+  source:
+    repoURL: 'https://charts.min.io/'
+    targetRevision: 4.0.15
+    helm:
+      values: |-
+        environment:
+          MINIO_BROWSER_REDIRECT_URL: https://minio-console.homelab.io
+        ingress:
+          enabled: true
+          path: /
+          hosts:
+            - minio.homelab.io
+          tls:
+            - secretName: minio-tls
+              hosts:
+                - minio.homelab.io
+        consoleIngress:
+          enabled: true
+          path: /
+          hosts:
+            - minio-console.homelab.io
+          tls:
+            - secretName: minio-console-tls
+              hosts:
+                - minio-console.homelab.io
+        replicas: 1
+        rootUser: admin
+        rootPassword: ad
+        persistence:
+          enabled: true
+          existingClaim: local-path-pvc
+          storageClass: "local-path"
+          accessMode: ReadWriteOnce
+          size: 512Mi
+        resources:
+          requests:
+            memory: 500Mi
+        gateway:
+          replicas: 1
+        mode: standalone
+        buckets:
+        - name: argo-artifacts
+          policy: public
+          purge: true
+          versioning: false
+          objectlocking: false
+        - name: state-store
+          policy: none
+          purge: true
+          versioning: false
+          objectlocking: false
+        - name: vault-backend
+          policy: none
+          purge: true
+          versioning: false
+          objectlocking: false
+    chart: minio
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: minio
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

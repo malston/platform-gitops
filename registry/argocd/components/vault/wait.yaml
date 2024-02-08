@@ -39,4 +39,5 @@ subjects:
   - kind: ServiceAccount
     name: k8s-toolkit
     namespace: vault
+# ---
 # Add wait for vault init to complete and one for vault unseal
