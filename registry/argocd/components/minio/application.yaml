@@ -37,8 +37,7 @@ spec:
         rootPassword: ad
         persistence:
           enabled: true
-          existingClaim: local-path-pvc
-          storageClass: "local-path"
+          existingClaim: minio-pvc
           accessMode: ReadWriteOnce
           size: 512Mi
         resources:
