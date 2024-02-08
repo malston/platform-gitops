@@ -6,7 +6,7 @@ terraform {
   backend "s3" {
     bucket   = "state-store"
     key      = "terraform/vault/terraform.tfstate"
-    endpoint = "http://minio.homelab.io:9000
+    endpoint = "http://minio.homelab.io:9000"
 
     access_key                  = "admin"
     secret_key                  = "admin"
