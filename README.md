@@ -63,3 +63,9 @@ The bootstrapping process will create the following applications:
 
   terraform apply terraform.tfplan
   ```
+
+- Create a secret used by ExternalSecrets Store
+
+  ```sh
+  kubectl create secret generic vault-token --from-literal=token=$VAULT_TOKEN --namespace=external-secrets-operator
+  ```
