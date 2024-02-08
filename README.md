@@ -11,7 +11,7 @@ The bootstrapping process will create the following applications:
 
 | Application              | Namespace        | Description                                 | URL (where applicable)             |
 | ------------------------ | ---------------- | ------------------------------------------- | ---------------------------------- |
-| Argo CD                  | argocd           | GitOps Continuous Delivery                  | https://argocd.homelab.io               |
+| ArgoCD                  | argocd           | GitOps Continuous Delivery                  | https://argocd.homelab.io               |
 | Cert Manager             | cert-manager     | Certificate Automation Utility              |                                    |
 | Certificate Issuers      | clusterwide      | Let's Encrypt browser-trusted certificates  |                                    |
 | External Secrets         | external-secrets | Syncs Kubernetes secrets with Vault secrets |                                    |
@@ -20,7 +20,7 @@ The bootstrapping process will create the following applications:
 
 ## Bootstrapping
 
-- Install Argo CD
+- Install ArgoCD
 
   ```sh
   export GIT_USER=<git-user>
@@ -35,4 +35,11 @@ The bootstrapping process will create the following applications:
   kubectl apply -f registry/argocd/registry.yaml
   argocd app get registry
   argocd app sync registry
+  ```
+
+- Login to ArgoCD
+
+  ```sh
+  argocd account update-password --current-password "$(argocd admin initial-password -n argocd | head -1)"
+  argocd login argocd.homelab.io --username admin --insecure
   ```
