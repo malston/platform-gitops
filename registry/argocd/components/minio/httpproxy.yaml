@@ -19,7 +19,7 @@ spec:
       - prefix: /
       services:
         - name: minio
-          port: 80
+          port: 9000
 ---
 apiVersion: projectcontour.io/v1
 kind: HTTPProxy
@@ -42,4 +42,4 @@ spec:
       - prefix: /
       services:
         - name: minio-console
-          port: 80
+          port: 9001
