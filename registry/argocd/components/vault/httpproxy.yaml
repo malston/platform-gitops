@@ -8,12 +8,6 @@ metadata:
 spec:
   virtualhost:
     fqdn: vault.homelab.io
-    tls:
-      passthrough: true
-  tcpproxy:
-    services:
-      - name: vault
-        port: 443
   routes:
     - conditions:
       - prefix: /

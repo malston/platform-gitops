@@ -8,12 +8,6 @@ metadata:
 spec:
   virtualhost:
     fqdn: minio.homelab.io
-    tls:
-      passthrough: true
-  tcpproxy:
-    services:
-      - name: minio
-        port: 443
   routes:
     - conditions:
       - prefix: /
@@ -31,12 +25,6 @@ metadata:
 spec:
   virtualhost:
     fqdn: minio-console.homelab.io
-    tls:
-      passthrough: true
-  tcpproxy:
-    services:
-      - name: minio-console
-        port: 443
   routes:
     - conditions:
       - prefix: /
