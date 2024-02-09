@@ -44,7 +44,9 @@ The bootstrapping process will create the following applications:
   argocd login argocd.homelab.io --username admin --insecure || argocd login argocd.homelab.io --username admin --insecure --core
   ```
 
-- Configure Vault
+- Login to Vault and configure the root key into shards (referred as key shares, or unseal keys). A certain threshold of shards is required to reconstruct the root key, which is then used to decrypt the Vault's encryption key. Vault is typically initialized with 5 key shares and a key threshold of 3. Refer to the [Seal/Unseal documentation](Seal/Unseal documentation) for further details.
+
+- Add secrets to Vault
 
   ```sh
   cd terraform/vault
