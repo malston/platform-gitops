@@ -69,3 +69,9 @@ The bootstrapping process will create the following applications:
   ```sh
   kubectl create secret generic vault-token --from-literal=token=$VAULT_TOKEN --namespace=external-secrets-operator
   ```
+
+## TODO
+
+- [ ] Create cert for [kubelab.app](kubelab.app) domain.
+- [ ] Rebuild with [kubelab.app](kubelab.app) domain.
+- [ ] Create a CLI app that does all the steps above.
