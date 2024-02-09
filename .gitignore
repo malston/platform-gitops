@@ -58,3 +58,5 @@ secrets.*
 *.crt
 *.pem
 *.pub
+*.cer
+
