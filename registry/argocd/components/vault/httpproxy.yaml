@@ -7,10 +7,10 @@ metadata:
     argocd.argoproj.io/sync-wave: '10'
 spec:
   virtualhost:
-    fqdn: vault.homelab.io
+    fqdn: vault.kubelab.app
   routes:
-    - conditions:
-      - prefix: /
-      services:
-        - name: vault
-          port: 8200
+  - conditions:
+    - prefix: /
+    services:
+    - name: vault
+      port: 8200

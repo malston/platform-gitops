@@ -12,8 +12,8 @@ spec:
     targetRevision: 0.22.0
     helm:
       parameters:
-        - name: 'server.ingress.hosts[0].host'
-          value: vault.homelab.io
+      - name: 'server.ingress.hosts[0].host'
+        value: vault.kubelab.app
       values: |-
         server:
           config: |
@@ -36,12 +36,12 @@ spec:
           ingress:
             enabled: false
             hosts:
-              - host: vault.homelab.io
+              - host: vault.kubelab.app
             pathType: Prefix
             tls:
               - secretName: vault-tls
                 hosts:
-                  - vault.homelab.io
+                  - vault.kubelab.app
           ui:
             enabled: true
             serviceType: "ClusterIP"
@@ -56,9 +56,9 @@ spec:
       prune: true
       selfHeal: true
     syncOptions:
-      - CreateNamespace=true
+    - CreateNamespace=true
   ignoreDifferences:
-    - group: admissionregistration.k8s.io
-      kind: MutatingWebhookConfiguration
-      jsonPointers:
-        - /webhooks
+  - group: admissionregistration.k8s.io
+    kind: MutatingWebhookConfiguration
+    jsonPointers:
+    - /webhooks

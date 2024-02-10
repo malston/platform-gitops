@@ -7,13 +7,13 @@ metadata:
     argocd.argoproj.io/sync-wave: '10'
 spec:
   virtualhost:
-    fqdn: minio.homelab.io
+    fqdn: minio.kubelab.app
   routes:
-    - conditions:
-      - prefix: /
-      services:
-        - name: minio
-          port: 9000
+  - conditions:
+    - prefix: /
+    services:
+    - name: minio
+      port: 9000
 ---
 apiVersion: projectcontour.io/v1
 kind: HTTPProxy
@@ -24,10 +24,10 @@ metadata:
     argocd.argoproj.io/sync-wave: '10'
 spec:
   virtualhost:
-    fqdn: minio-console.homelab.io
+    fqdn: minio-console.kubelab.app
   routes:
-    - conditions:
-      - prefix: /
-      services:
-        - name: minio-console
-          port: 9001
+  - conditions:
+    - prefix: /
+    services:
+    - name: minio-console
+      port: 9001
