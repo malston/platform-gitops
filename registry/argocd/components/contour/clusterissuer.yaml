@@ -10,9 +10,6 @@ spec:
       name: letsencrypt-prod
     server: https://acme-v02.api.letsencrypt.org/directory
     solvers:
-    - http01:
-        ingress:
-          class: contour
     - dns01:
         cnameStrategy: Follow
         route53:
