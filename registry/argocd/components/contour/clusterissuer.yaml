@@ -23,4 +23,4 @@ spec:
             key: secretaccesskey
       selector:
         dnsZones:
-        - kubeapp.app
+        - kubelab.app
