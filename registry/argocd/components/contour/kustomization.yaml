@@ -6,6 +6,7 @@ generatorOptions:
 
 resources:
 - contour-package-install.yaml
+- external-secret.yaml
 
 secretGenerator:
 - name: contour-packages-values
