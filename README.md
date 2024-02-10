@@ -27,6 +27,7 @@ The bootstrapping process will create the following applications:
   export GIT_TOKEN=<personal-access-token>
   export GIT_REPO=https://github.com/$GIT_USER/argocd-bootstrap
   argocd-autopilot repo bootstrap
+  kubectl port-forward svc/argocd-server -n argocd 8000:443 &
   ```
 
 - Install Registry
@@ -70,6 +71,14 @@ The bootstrapping process will create the following applications:
 
   ```sh
   kubectl create secret generic vault-token --from-literal=token=$VAULT_TOKEN --namespace=external-secrets-operator
+  ```
+
+## Recover
+
+- If you delete argo cd for any reason and want to restore it.
+
+  ```sh
+  argocd-autopilot repo bootstrap --recover --app https://github.com/malston/argocd-bootstrap/bootstrap/argo-cd
   ```
 
 ## TODO
