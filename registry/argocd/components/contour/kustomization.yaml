@@ -7,6 +7,8 @@ generatorOptions:
 resources:
 - contour-package-install.yaml
 - external-secret.yaml
+- clusterissuer.yaml
+- certificate.yaml
 
 secretGenerator:
 - name: contour-packages-values
