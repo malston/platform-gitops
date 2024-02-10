@@ -14,7 +14,7 @@ spec:
         cnameStrategy: Follow
         route53:
           region: us-east-1
-          hostedZoneID: Z2Q2GUP1WG1LHK
+          hostedZoneID: Z03797052EOT9S3MIV49U
           accessKeyIDSecretRef:
             name: route53-secret
             key: accesskeyid
