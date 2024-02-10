@@ -6,13 +6,13 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: '100'
 spec:
-  project: default``
+  project: default
   source:
-    repoURL: 'git@gitlab.com:marsguitars/gitops.git'
+    repoURL: https://github.com/malston/platform-gitops.git
     path: registry/argocd/components/argocd
     targetRevision: HEAD
   destination:
-    server: 'https://kubernetes.default.svc'
+    server: https://kubernetes.default.svc
     namespace: argocd
   syncPolicy:
     automated:
