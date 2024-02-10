@@ -11,7 +11,7 @@ metadata:
   # configure a Host. Or use kubed to automate the synchronization of certs across namespaces
   namespace: cert-manager
 spec:
-  secretName: prod.wildcard.kubelab.app-669hf
+  secretName: prod-wildcard-certs
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer
