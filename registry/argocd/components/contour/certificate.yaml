@@ -1,0 +1,20 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: prod.wildcard.kubelab.app
+  # if you're using the ClusterIssuer CRD, then cert-manager will put the
+  # resulting secret in the Cluster Resource Namespace which is normally the cert-manager namespace
+  # if you're using the Issuer CRD, cert-manager will put the resulting Secret in the same Kubernetes
+  # namespace as the Certificate. Since we're using ClusterIssuer, the namespace must be cert-manager
+  #
+  # When using the Issuer CRD, you should create the certificate in whichever namespace you want to
+  # configure a Host. Or use kubed to automate the synchronization of certs across namespaces
+  namespace: cert-manager
+spec:
+  secretName: prod-wildcard-certs
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: "*.kubelab.app"
+  dnsNames:
+  - "*.kubelab.app"

@@ -1,0 +1,29 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-prod
+spec:
+  acme:
+    email: marktalston@gmail.com
+    preferredChain: ""
+    privateKeySecretRef:
+      name: letsencrypt-prod
+    server: https://acme-v02.api.letsencrypt.org/directory
+    solvers:
+    - http01:
+        ingress:
+          class: contour
+    - dns01:
+        cnameStrategy: Follow
+        route53:
+          region: us-east-1
+          hostedZoneID: Z2Q2GUP1WG1LHK
+          accessKeyIDSecretRef:
+            name: route53-secret
+            key: accesskeyid
+          secretAccessKeySecretRef:
+            name: route53-secret
+            key: secretaccesskey
+      selector:
+        dnsZones:
+        - kubeapp.app
