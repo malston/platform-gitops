@@ -35,7 +35,6 @@ The bootstrapping process will create the following applications:
   ```sh
   kubectl apply -f registry/argocd/registry.yaml
   argocd app get registry
-  argocd app sync registry
   ```
 
 - Login to ArgoCD
@@ -52,7 +51,7 @@ The bootstrapping process will create the following applications:
   ```sh
   cd terraform/vault
 
-  terraform init -backend=false
+  terraform init -backend=false || terraform init -reconfigure
 
   cat > terraform.tfvars <<EOF
   b64_docker_auth="$(echo malston:$GIT_TOKEN | base64)"
