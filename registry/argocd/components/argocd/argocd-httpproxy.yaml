@@ -3,6 +3,10 @@ kind: Ingress
 metadata:
   annotations:
     projectcontour.io/tls-cert-namespace: cert-manager
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    ingress.kubernetes.io/force-ssl-redirect: "true"
+    kubernetes.io/ingress.class: contour
+    kubernetes.io/tls-acme: "true"
   name: argocd
   namespace: argocd
 spec:
