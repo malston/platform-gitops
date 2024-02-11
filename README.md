@@ -81,8 +81,15 @@ The bootstrapping process will create the following applications:
   argocd-autopilot repo bootstrap --recover --app https://github.com/malston/argocd-bootstrap/bootstrap/argo-cd
   ```
 
-## TODO
+## Download MinIO buckets
 
-- [ ] Create cert for [kubelab.app](kubelab.app) domain.
-- [ ] Rebuild with [kubelab.app](kubelab.app) domain.
-- [ ] Create a CLI app that does all the steps above.
+  ```sh
+  mc alias set local https://minio.kubelab.app \
+  $(vault kv get -mount=secret -format=json ci-secrets | jq -r .data.data.accesskey) \
+  $(vault kv get -mount=secret -format=json ci-secrets | jq -r .data.data.secretkey)
+  mc admin info local
+  mc ls local --recursive
+  rm -rf minio
+  mkdir minio
+  mc cp local --recursive minio
+  ```
