@@ -8,6 +8,8 @@ metadata:
 spec:
   virtualhost:
     fqdn: minio.kubelab.app
+    tls:
+      secretName: cert-manager/prod-wildcard-certs
   routes:
   - conditions:
     - prefix: /
@@ -25,9 +27,12 @@ metadata:
 spec:
   virtualhost:
     fqdn: minio-console.kubelab.app
+    tls:
+      secretName: cert-manager/prod-wildcard-certs
   routes:
   - conditions:
     - prefix: /
     services:
     - name: minio-console
       port: 9001
+

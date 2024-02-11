@@ -9,11 +9,7 @@ spec:
   virtualhost:
     fqdn: argocd.kubelab.app
     tls:
-      passthrough: true
-  tcpproxy:
-    services:
-    - name: argocd-server
-      port: 443
+      secretName: cert-manager/prod-wildcard-certs
   routes:
   - conditions:
     - prefix: /

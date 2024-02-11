@@ -8,6 +8,8 @@ metadata:
 spec:
   virtualhost:
     fqdn: vault.kubelab.app
+    tls:
+      secretName: cert-manager/prod-wildcard-certs
   routes:
   - conditions:
     - prefix: /

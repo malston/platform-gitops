@@ -1,0 +1,10 @@
+apiVersion: projectcontour.io/v1
+kind: TLSCertificateDelegation
+metadata:
+  name: prod-wildcard-certs
+  namespace: cert-manager
+spec:
+  delegations:
+    - secretName: prod-wildcard-certs
+      targetNamespaces:
+      - "*"
