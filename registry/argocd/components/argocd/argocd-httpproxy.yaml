@@ -1,49 +1,5 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
-metadata:
-  name: argocd-server-http
-  annotations:
-    kubernetes.io/ingress.class: contour-internal
-    ingress.kubernetes.io/force-ssl-redirect: "true"
-spec:
-  rules:
-  - host: internal.kubelab.app
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: argocd-server
-            port:
-              name: http
-  tls:
-  - hosts:
-    - internal.kubelab.app
-    secretName: prod-wildcard-certs
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: argocd-server-grpc
-  annotations:
-    kubernetes.io/ingress.class: contour-internal
-spec:
-  rules:
-  - host: grpc-internal.kubelab.app
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: argocd-server
-            port:
-              name: https
-  tls:
-  - hosts:
-    - grpc-internal.kubelab.app
-    secretName: prod-wildcard-certs
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
