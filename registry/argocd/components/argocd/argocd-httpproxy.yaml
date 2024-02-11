@@ -7,7 +7,7 @@ metadata:
     ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
   rules:
-  - host: internal.path.to.argocd.io
+  - host: internal.kubelab.app
     http:
       paths:
       - path: /
@@ -19,7 +19,7 @@ spec:
               name: http
   tls:
   - hosts:
-    - internal.path.to.argocd.io
+    - internal.kubelab.app
     secretName: prod-wildcard-certs
 ---
 apiVersion: networking.k8s.io/v1
@@ -30,7 +30,7 @@ metadata:
     kubernetes.io/ingress.class: contour-internal
 spec:
   rules:
-  - host: grpc-internal.path.to.argocd.io
+  - host: grpc-internal.kubelab.app
     http:
       paths:
       - path: /
@@ -42,7 +42,7 @@ spec:
               name: https
   tls:
   - hosts:
-    - grpc-internal.path.to.argocd.io
+    - grpc-internal.kubelab.app
     secretName: prod-wildcard-certs
 ---
 apiVersion: networking.k8s.io/v1
@@ -54,7 +54,7 @@ metadata:
     ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
   rules:
-  - host: external.path.to.argocd.io
+  - host: argocd.kubelab.app
     http:
       paths:
       - path: /api/dex/callback
@@ -66,5 +66,5 @@ spec:
               name: http
   tls:
   - hosts:
-    - external.path.to.argocd.io
+    - argocd.kubelab.app
     secretName: prod-wildcard-certs
