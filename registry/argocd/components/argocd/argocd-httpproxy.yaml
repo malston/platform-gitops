@@ -11,9 +11,14 @@ spec:
     fqdn: argocd.kubelab.app
     tls:
       secretName: cert-manager/prod-wildcard-certs
+  # tcpproxy:
+  #   services:
+  #     - name: argocd-server
+  #       port: 80
   routes:
   - conditions:
     - prefix: /
     services:
     - name: argocd-server
-      port: 80
+      port: 443
+      protocol: tls
