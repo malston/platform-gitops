@@ -1,16 +1,13 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
+  name: argocd-server-http
   annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-    # ingress.kubernetes.io/force-ssl-redirect: "true"
-    kubernetes.io/ingress.class: contour
-    kubernetes.io/tls-acme: "true"
-  name: argocd
-  namespace: argocd
+    kubernetes.io/ingress.class: contour-internal
+    ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
   rules:
-  - host: argocd.kubelab.app
+  - host: internal.path.to.argocd.io
     http:
       paths:
       - path: /
@@ -19,8 +16,55 @@ spec:
           service:
             name: argocd-server
             port:
-              number: 443
+              name: http
   tls:
   - hosts:
-    - argocd.kubelab.app
+    - internal.path.to.argocd.io
+    secretName: prod-wildcard-certs
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argocd-server-grpc
+  annotations:
+    kubernetes.io/ingress.class: contour-internal
+spec:
+  rules:
+  - host: grpc-internal.path.to.argocd.io
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: argocd-server
+            port:
+              name: https
+  tls:
+  - hosts:
+    - grpc-internal.path.to.argocd.io
+    secretName: prod-wildcard-certs
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argocd-server-external-callback-http
+  annotations:
+    kubernetes.io/ingress.class: contour-external
+    ingress.kubernetes.io/force-ssl-redirect: "true"
+spec:
+  rules:
+  - host: external.path.to.argocd.io
+    http:
+      paths:
+      - path: /api/dex/callback
+        pathType: Prefix
+        backend:
+          service:
+            name: argocd-server
+            port:
+              name: http
+  tls:
+  - hosts:
+    - external.path.to.argocd.io
     secretName: prod-wildcard-certs
