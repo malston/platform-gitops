@@ -3,13 +3,17 @@ kind: HTTPProxy
 metadata:
   name: argocd
   namespace: argocd
-  annotations:
-    argocd.argoproj.io/sync-wave: '10'
+  labels:
+    app.kubernetes.io/name: argocd-httpproxy
 spec:
   virtualhost:
     fqdn: argocd.kubelab.app
     tls:
-      secretName: cert-manager/prod-wildcard-certs
+      passthrough: true
+  tcpproxy:
+    services:
+    - name: argocd-server
+      port: 443
   routes:
   - conditions:
     - prefix: /
