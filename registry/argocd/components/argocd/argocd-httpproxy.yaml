@@ -1,22 +1,23 @@
-apiVersion: projectcontour.io/v1
-kind: HTTPProxy
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
+  annotations:
+    projectcontour.io/tls-cert-namespace: cert-manager
   name: argocd
   namespace: argocd
-  labels:
-    app.kubernetes.io/name: argocd-httpproxy
 spec:
-  virtualhost:
-    fqdn: argocd.kubelab.app
-    tls:
-      passthrough: true
-  tcpproxy:
-    services:
-    - name: argocd-server
-      port: 443
-  routes:
-  - conditions:
-    - prefix: /
-    services:
-    - name: argocd-server
-      port: 80
+  rules:
+  - host: argocd.kubelab.app
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: argocd-server
+            port:
+              number: 443
+  tls:
+  - hosts:
+    - argocd.kubelab.app
+    secretName: cert-manager/prod-wildcard-certs
