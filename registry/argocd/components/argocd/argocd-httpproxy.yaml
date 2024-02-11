@@ -20,4 +20,4 @@ spec:
   tls:
   - hosts:
     - argocd.kubelab.app
-    secretName: cert-manager/prod-wildcard-certs
+    secretName: prod-wildcard-certs
