@@ -5,8 +5,6 @@ metadata:
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: '10'
-  labels:
-    app.kubernetes.io/name: argocd
 spec:
   virtualhost:
     fqdn: argocd.kubelab.app
@@ -17,4 +15,4 @@ spec:
     - prefix: /
     services:
     - name: argocd-server
-      port: 443
+      port: 80
