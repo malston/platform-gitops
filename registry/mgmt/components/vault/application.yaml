@@ -25,7 +25,7 @@ spec:
             }
             storage "s3" {
               bucket     = "vault-backend"
-              endpoint   = "https://minio.kubelab.app"
+              endpoint   = "http://minio.minio.svc.cluster.local:9000"
               region     = "main"
               access_key = "k-ray"
               secret_key = "feedkraystars"
