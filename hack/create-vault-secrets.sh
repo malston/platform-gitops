@@ -11,7 +11,7 @@ if kubectl get secret vault-token -n external-secrets-operator; then
 fi
 kubectl create secret generic vault-token --from-literal=token="$VAULT_TOKEN" --namespace=external-secrets-operator
 
-vault login
+echo -n "$VAULT_TOKEN" | vault login -
 
 echo -n "Enter the route53 accesskeyID: "
 read -r AWS_ACCESS_KEY_ID
