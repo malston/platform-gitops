@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: vault-components
+  name: contour-components
   namespace: argocd
   annotations:
     argocd.argoproj.io/sync-wave: '20'
@@ -9,14 +9,14 @@ spec:
   project: default
   source:
     repoURL: https://github.com/malston/platform-gitops.git
-    path: registry/argocd/components/vault
+    path: registry/mgmt/components/contour
     targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
-    namespace: vault
+    namespace: tanzu-system-ingress
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
-      - CreateNamespace=true
+    - CreateNamespace=true

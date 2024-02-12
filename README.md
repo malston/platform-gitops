@@ -33,7 +33,7 @@ The bootstrapping process will create the following applications:
 - Install Registry
 
   ```sh
-  kubectl apply -f registry/argocd/registry.yaml
+  kubectl apply -f registry/mgmt/registry.yaml
   argocd app get registry
   ```
 
