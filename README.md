@@ -26,7 +26,7 @@ The bootstrapping process will create the following applications:
   export GIT_USER=<git-user>
   export GIT_TOKEN=<personal-access-token>
   export GIT_REPO=https://github.com/$GIT_USER/argocd-bootstrap
-  argocd-autopilot repo bootstrap
+  argocd-autopilot repo bootstrap || argocd-autopilot repo bootstrap --recover --app https://github.com/malston/argocd-bootstrap/bootstrap/argo-cd
   kubectl port-forward svc/argocd-server -n argocd 8000:443 &
   ```
 
@@ -56,7 +56,6 @@ The bootstrapping process will create the following applications:
   cat > terraform.tfvars <<EOF
   b64_docker_auth="$(echo malston:$GIT_TOKEN | base64)"
   github_token="$GIT_TOKEN"
-  vault_address="http://vault.kubelab.app"
   vault_token="$VAULT_TOKEN"
   kubernetes_api_endpoint="https://192.168.15.23:6443"
   EOF
@@ -83,12 +82,9 @@ The bootstrapping process will create the following applications:
 ## Download MinIO buckets
 
   ```sh
-  mc alias set local https://minio.kubelab.app \
-  $(vault kv get -mount=secret -format=json ci-secrets | jq -r .data.data.accesskey) \
-  $(vault kv get -mount=secret -format=json ci-secrets | jq -r .data.data.secretkey)
-  mc admin info local
-  mc ls local --recursive
-  rm -rf minio
+  mc alias set kubelab https://minio.kubelab.app $(vault kv get -mount=secret -format=json ci-secrets | jq -r .data.data.accesskey) $(vault kv get -mount=secret -format=json ci-secrets | jq -r .data.data.secretkey)
+  mc admin info kubelab
+  mc ls kubelab --recursive
   mkdir minio
-  mc cp local --recursive minio
+  mc cp kubelab --recursive minio
   ```
