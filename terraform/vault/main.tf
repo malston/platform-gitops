@@ -6,7 +6,7 @@ terraform {
   backend "s3" {
     bucket   = "state-store"
     key      = "terraform/vault/terraform.tfstate"
-    endpoint = "https://minio.kubelab.app"
+    endpoint = "http://minio.minio.svc.cluster.local:9000"
 
     access_key                  = "k-ray"
     secret_key                  = "feedkraystars"
