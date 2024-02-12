@@ -21,4 +21,3 @@ read -r AWS_SECRET_ACCESS_KEY
 
 vault kv put -mount=secret route53 "accesskeyid=$AWS_ACCESS_KEY_ID" "secretaccesskey=$AWS_SECRET_ACCESS_KEY"
 vault kv get -mount=secret -format=json route53
-
