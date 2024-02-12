@@ -34,7 +34,7 @@ The bootstrapping process will create the following applications:
 
   ```sh
   kubectl apply -f registry/mgmt/registry.yaml
-  argocd app get registry
+  argocd app get registry-mgmt
   ```
 
 - Login to ArgoCD
@@ -51,10 +51,14 @@ The bootstrapping process will create the following applications:
   ```sh
   cd terraform/vault
 
-  terraform init -backend=false || terraform init -reconfigure
+  terraform init || terraform init -reconfigure
 
   cat > terraform.tfvars <<EOF
+  aws_access_key_id="k-ray"
+  aws_secret_access_key="feedkraystars"
   b64_docker_auth="$(echo malston:$GIT_TOKEN | base64)"
+  cibot_ssh_private_key="$(sed -z 's/\n/\\n/g' ~/.ssh/github_com_rsa)"
+  cibot_ssh_public_key="$(< ~/.ssh/github_com_rsa.pub)"
   github_token="$GIT_TOKEN"
   vault_token="$VAULT_TOKEN"
   kubernetes_api_endpoint="https://192.168.15.23:6443"
