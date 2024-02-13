@@ -6,11 +6,15 @@ set -o pipefail
 
 __DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
 
-echo -n "Enter the route53 accesskeyID: "
-read -r AWS_ACCESS_KEY_ID
+if [[ -z $AWS_ACCESS_KEY_ID ]]; then
+  echo -n "Enter the route53 accesskeyID: "
+  read -r AWS_ACCESS_KEY_ID
+fi
 
-echo -n "Enter the route53 secretAccessKey: "
-read -r AWS_SECRET_ACCESS_KEY
+if [[ -z $AWS_SECRET_ACCESS_KEY ]]; then
+  echo -n "Enter the route53 secretAccessKey: "
+  read -rs AWS_SECRET_ACCESS_KEY
+fi
 
 cat <<EOF | kubectl -n cert-manager apply -f -
 apiVersion: v1
@@ -23,3 +27,8 @@ stringData:
   accesskeyid: $AWS_ACCESS_KEY_ID 
   secretaccesskey: $AWS_SECRET_ACCESS_KEY 
 EOF
+
+echo -n "$VAULT_TOKEN" | vault login -
+
+vault kv put -mount=secret route53 "accesskeyid=$AWS_ACCESS_KEY_ID" "secretaccesskey=$AWS_SECRET_ACCESS_KEY"
+vault kv get -mount=secret -format=json route53
