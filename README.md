@@ -9,14 +9,14 @@ This repository has 2 main sections
 
 The bootstrapping process will create the following applications:
 
-| Application              | Namespace        | Description                                 | URL (where applicable)             |
-| ------------------------ | ---------------- | ------------------------------------------- | ---------------------------------- |
-| ArgoCD                  | argocd           | GitOps Continuous Delivery                  | https://argocd.kubelab.app               |
-| Cert Manager             | cert-manager     | Certificate Automation Utility              |                                    |
-| Certificate Issuers      | clusterwide      | Let's Encrypt browser-trusted certificates  |                                    |
-| External Secrets         | external-secrets | Syncs Kubernetes secrets with Vault secrets |                                    |
-| Contour Ingress Controller | projectcontour    | Ingress Controller                          |                                    |
-| Vault                    | vault            | Secrets Management                          | https://vault.kubelab.app                |
+| Application                | Namespace        | Description                                 | URL (where applicable)             |
+| ---------------------------| ---------------- | ------------------------------------------- | ---------------------------------- |
+| ArgoCD                     | argocd           | GitOps Continuous Delivery                  | https://argocd.kubelab.app         |
+| Cert Manager               | cert-manager     | Certificate Automation Utility              |                                    |
+| Certificate Issuers        | clusterwide      | Let's Encrypt browser-trusted certificates  |                                    |
+| External Secrets           | external-secrets | Syncs Kubernetes secrets with Vault secrets |                                    |
+| Contour Ingress Controller | projectcontour   | Ingress Controller                          |                                    |
+| Vault                      | vault            | Secrets Management                          | https://vault.kubelab.app          |
 
 ## Bootstrapping
 
@@ -27,9 +27,14 @@ The bootstrapping process will create the following applications:
   export GIT_TOKEN=<personal-access-token>
   export GIT_REPO=https://github.com/$GIT_USER/argocd-bootstrap
   argocd-autopilot repo bootstrap || argocd-autopilot repo bootstrap --recover --app https://github.com/malston/argocd-bootstrap/bootstrap/argo-cd
-  kubectl port-forward svc/argocd-server -n argocd 8000:443 &
   ```
 
+  Setup port-forward so we can to connect to argocd on the local interface
+
+  ```sh
+  kubectl port-forward svc/argocd-server -n argocd 8000:443 &
+  ```
+  
 - Install Registry
 
   ```sh
